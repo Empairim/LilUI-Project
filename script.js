@@ -1,19 +1,22 @@
-fetch("https://mhw-db.com/armor")
-  .then((response) => response.json()) // Parse the response as JSON
-  .then((data) => {
-    // Get the first armor object in the array
-    const armor = data[0];
+fetch(catUrl)
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
 
-    // Display the name and rank of the armor
-    const nameEl = document.querySelector("#name");
-    nameEl.textContent = armor.name;
-    const rankEl = document.querySelector("#rank");
-    rankEl.textContent = armor.rank;
+function showTab(tabIndex) {
+  // Hide all tabs
+  let tabs = document.getElementsByClassName("tab");
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove("active");
+  }
 
-    // Display the male and female images of the armor
-    const maleImgEl = document.querySelector("#male-img");
-    maleImgEl.src = armor.assets.imageMale;
-    const femaleImgEl = document.querySelector("#female-img");
-    femaleImgEl.src = armor.assets.imageFemale;
-  })
-  .catch((err) => console.error(err));
+  // Show the selected tab
+  let selectedTab = document.getElementById("tab" + (tabIndex + 1));
+  selectedTab.classList.add("active");
+
+  let catUrl = "https://api.thecatapi.com/v1/images/search";
+  fetch(catUrl)
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+}
